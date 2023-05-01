@@ -2,10 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 
+
 export default function Navbar(props) {
   return (
     <div>
-       <nav className="navbar navbar-expand-lg bg-body-tertiary">
+       <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
   <div className="container-fluid">
     <a className="navbar-brand" href="/">{props.title}</a>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,7 +24,7 @@ export default function Navbar(props) {
       </ul>
       <form className="d-flex" role="search">
         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button className="btn btn-outline-success" type="submit">Search</button>
+        <button className="btn btn-outline-primary" type="submit">Search</button>
       </form>
     </div>
   </div>
@@ -39,5 +40,5 @@ Navbar.defaultProps = {
 
 Navbar.propTypes = {
     title: PropTypes.string.isRequired,  // not giving error for isRequired also. [chck]
-    About: PropTypes.string,        // for wtf reason it is getting compiled ???
+    About: PropTypes.string,        // for wtf reason it is getting compiled ???   see see bru it is getting compiled but see the console, the error is visible in the console hehe. Now solve it. And yes do check consoles
                 }
