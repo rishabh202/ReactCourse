@@ -6,15 +6,29 @@ export default function TextForm(props) {
         
         // console.log("UpperCase was clicked" + text);
         let newText = text.toUpperCase();
+        setText(newText);
+        props.showAlert("Converted to uppercase", "success")
+      }
+      
+      const handleExtraSpaces = () => {
+        let newText  = text.split(/[ ]+/);
+        setText(newText.join(" "))
+        props.showAlert("Removed extra spaces", "success")
+      }
+      
+      const handleClearClick = () =>{
+        let newText = "";
         setText(newText)
-  }
+        props.showAlert("Text has been cleared", "success")
+      }
   
   const handleLowClick = () => {
         
         // console.log("UpperCase was clicked" + text);
         let newText = text.toLowerCase();
         setText(newText)
-  }
+        props.showAlert("Converted to lowercase", "success")
+      }
   
   const handleOnChange = (event) => {
         // event.preventDefault();
@@ -43,6 +57,7 @@ export default function TextForm(props) {
     let existing_text = prompt("Enter which word to replace : ");
     let replaced_text = prompt("Enter New Text");
     setText(text.replaceAll(existing_text, replaced_text))
+    props.showAlert("word has been replaced", "success")
   }
 
   
@@ -51,6 +66,7 @@ export default function TextForm(props) {
       try {
         await navigator.clipboard.writeText(text);
         console.log('Content copied to clipboard');
+        props.showAlert("Text has been copied", "success")
       } catch (err) {
         console.error('Failed to copy: ', err);
       }
@@ -64,26 +80,28 @@ export default function TextForm(props) {
   // setText("New Text");    
   return (
     <>
-    <div className='container'>
+    <div className='container' style={{color: props.mode==='dark'?'white':'black'}}>
         <h2>{props.heading}</h2>
         
-    <div className="form-group mb-3">       
-      <textarea className="form-control" value = {text} onChange={handleOnChange} id="exampleFormControlTextarea1" rows="9"></textarea>
+    <div className="form-group mb-3" >       
+      <textarea className="form-control" value = {text} onChange={handleOnChange} style={{backgroundColor:props.mode==='dark'?'#343a40':'white',color: props.mode==='dark'?'white':'black'}} id="exampleFormControlTextarea1" rows="9"></textarea>
     </div>
     
-    <button className="btn btn-primary mx-2" onClick={handleUpClick}>Convert to UpperCase</button>
-    <button className="btn btn-primary" onClick={handleLowClick}>Convert to LowerCase</button>
-    <button type="button" onClick={speak}class="btn btn-primary mx-2">Text-to-Speech</button>
+    <button className="btn btn-primary mx-1"  onClick={handleUpClick}>Convert to UpperCase</button>
+    <button type="button" onClick={speak}class="btn btn-primary mx-1">Text-to-Speech</button>
+    <button className="btn btn-primary mx-1" onClick={handleLowClick}>Convert to LowerCase</button>
+    <button type="button" onClick={handleExtraSpaces}class="btn btn-primary mx-1">Remove Extra Spaces</button>
     {/* <button type="button" onClick={reversed}class="btn btn-primary ">Reverse</button> */}
-    <button type="button" onClick={replacecasefunc}class="btn btn-primary">Replace</button>
-    <button type="button" onClick={copyContent}class="btn btn-primary mx-2">Copy</button>
+    <button type="button" onClick={replacecasefunc}class="btn btn-primary mx-1">Replace</button>
+    <button type="button" onClick={handleClearClick}class="btn btn-primary mx-1">Clear</button>
+    <button type="button" onClick={copyContent}class="btn btn-primary mx-1">Copy</button>
   </div>
-     <div className="container my-3">
+     <div className="container my-3" style={{color: props.mode==='dark'?'white':'black'}}>
       <h2>Your text summary</h2>
       <p>{text.split(" ").length} Words and {text.length} Characters</p>
       <p>{0.008 * text.split(" ").length} Minutes required to read (Approx)</p>
       <h3>Preview</h3>
-      <p>{text}</p>
+      <p>{text.length>0?text:'Enter your text in the text-area above to preview it here'}</p>
      </div>
 
     </>

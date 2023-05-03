@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+// import propTypes from 'prop-types'
 
 
-export default function About() {
+export default function About(props) {
 
     const [myStyle, setMyStyle] = useState({
         color: 'black',
@@ -29,7 +30,7 @@ export default function About() {
     }
 
   return (
-    <div className="container my-2" style ={myStyle}>
+    <div className="container my-2" style ={myStyle} >
          <h2 className='my-2'>About Us</h2>
             <div>
             <div className="accordion" id="accordionExample"  style ={myStyle}>
@@ -71,7 +72,7 @@ export default function About() {
         </div>
         </div>
             </div>
-            <button type="button" onClick={toggleStyle} class="btn btn-dark my-2">{btnText}</button>
+            <button type="button" onClick={toggleStyle} className="btn btn-dark my-2">{btnText}</button>
     </div>
   )
 }

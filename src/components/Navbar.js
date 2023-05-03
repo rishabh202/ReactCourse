@@ -1,24 +1,41 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import {link} from 'react-router-dom'
 
 
+
+// Make the navbar sticky bruh.
+//  <Navbar sticky="top" />
+
+
+        // const changegreen = ()=>{
+        //   document.body.style.backgroundColor = '#35C649'
+        // }
+        // const changeyellow = ()=>{
+        //   document.body.style.backgroundColor = '#CAB911'
+        // }
+        // const changered = ()=>{
+        //   document.body.style.backgroundColor = '#C15031'
+        // }
 
 export default function Navbar(props) {
   return (
+     
+    
     <div>
-       <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+       <nav className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode} mb-3 position:fixed top:0`}>
   <div className="container-fluid">
-    <a className="navbar-brand" href="/">{props.title}</a>
+    <link className="navbar-brand" to="/">{props.title}</link>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="/">Home</a>
+          <link className="nav-link active" aria-current="page" to="/">Home</link>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="/">{props.About}</a>
+          <link className="nav-link" to="/about">{props.About}</link>
         </li>
       
       </ul>
@@ -28,6 +45,21 @@ export default function Navbar(props) {
       </form>
     </div>
   </div>
+      <div className={`form-check form-switch text-${props.mode==='light'?'dark':'light'}`}>
+      <input className="form-check-input" onClick={props.toggleMode} type="checkbox" role="switch" id="flexSwitchCheckDefault"/>
+      <label className="form-check-label" htmlFor="flexSwitchCheckDefault">DarkMode‎</label>
+    </div>
+
+    <div className="dropdown mx-4"/>
+  <button className="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Colored Background
+  </button>
+  {/* <ul className="dropdown-menu">
+    <li><link className="dropdown-item" onClick={props.changegreen} href="#">Green</link></li>
+    <li><link className="dropdown-item" onClick={props.changered} href="#">Red</link></li>
+    <li><link className="dropdown-item" onClick={props.changeyellow} href="#">Yellow</link></li>
+  </ul> */}
+
 </nav>
     </div>
   )
