@@ -1,2 +1,2 @@
-# TextManager
+# ReactCourse
 Leaning react
